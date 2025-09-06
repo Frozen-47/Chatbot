@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduBot - Teacher's Day Terminal</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Boot Screen -->
+    <div class="boot-screen" id="bootScreen">
+        <div class="boot-logo">🎓</div>
+        <div class="boot-title">EduBot Terminal v3.0</div>
+        <div class="boot-messages" id="bootMessages">
+            <!-- Boot messages will be added dynamically -->
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <!-- Main Terminal Window -->
+    <div class="terminal-window" id="terminalWindow">
+        <div class="terminal-header">
+            <div class="window-controls">
+                <div class="control-button close"></div>
+                <div class="control-button minimize"></div>
+                <div class="control-button maximize"></div>
+            </div>
+            <div class="window-title">edubot-terminal.exe</div>
+        </div>
+        
+        <div class="terminal-content">
+            <div class="app-header">
+                <div class="app-title">
+                    <span>></span>
+                    <span>TEACHER'S DAY CHATBOT</span>
+                </div>
+                <div class="version-info">v3.0</div>
+            </div>
+
+            <div class="chat-area" id="chatArea">
+                <div class="chat-message bot-message">
+                    <span>Hello! I'm EduBot, your Teacher's Day assistant. I'm here to help you celebrate the incredible educators who shape our world. How may I assist you in honoring teachers today?</span>
+                </div>
+            </div>
+
+            <div class="quick-commands" id="quickCommands">
+                <button class="quick-btn" onclick="sendQuickMessage('Teacher\'s Day history')">history</button>
+                <button class="quick-btn" onclick="sendQuickMessage('inspiring quotes')">quotes</button>
+                <button class="quick-btn student-btn" onclick="sendQuickMessage('student wishes')">student</button>
+                <button class="quick-btn teacher-btn" onclick="sendQuickMessage('teacher wishes')">teacher</button>
+                <button class="quick-btn" onclick="sendQuickMessage('appreciation ideas')">ideas</button>
+                <button class="quick-btn" onclick="sendQuickMessage('celebration plans')">celebrate</button>
+                <button class="quick-btn" onclick="sendQuickMessage('gift suggestions')">gifts</button>
+                <button class="quick-btn" onclick="sendQuickMessage('teaching methods')">methods</button>
+                <button class="quick-btn" onclick="sendQuickMessage('famous teachers')">famous</button>
+                <button class="quick-btn" onclick="sendQuickMessage('poetry about teachers')">poetry</button>
+                <button class="quick-btn" onclick="sendQuickMessage('worldwide celebrations')">global</button>
+                <button class="quick-btn" onclick="sendQuickMessage('classroom activities')">activities</button>
+                <button class="quick-btn" onclick="sendQuickMessage('teacher challenges')">challenges</button>
+                <button class="quick-btn" onclick="sendQuickMessage('education technology')">edtech</button>
+                <button class="quick-btn" onclick="sendQuickMessage('motivational messages')">motivation</button>
+                <button class="quick-btn" onclick="sendQuickMessage('parent appreciation')">parents</button>
+            </div>
+            
+            <div class="input-section">
+                <div class="input-container">
+                    <span class="input-prompt">> ask:</span>
+                    <input type="text" class="message-input" id="messageInput" placeholder="ask about teachers..." maxlength="200">
+                    <span class="cursor"></span>
+                </div>
+                <div class="command-hints">
+                    <div class="command-hint">
+                        <span class="command-key">enter</span>
+                        <span>send message</span>
+                    </div>
+                    <div class="command-hint">
+                        <span class="command-key" onclick="clearChat()">clear</span>
+                        <span>reset chat</span>
+                    </div>
+                    <div class="command-hint">
+                        <span class="command-key" onclick="sendQuickMessage('help')">help</span>
+                        <span>show commands</span>
+                    </div>
+                    <div class="command-hint">
+                        <div class="teacher-status">
+                            <div class="status-dot"></div>
+                            <span>teacher appreciation active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

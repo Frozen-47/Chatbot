@@ -1,0 +1,619 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'JetBrains Mono', monospace;
+    background: #000;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    line-height: 1.4;
+}
+
+/* Boot Screen Styles */
+.boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+}
+
+.boot-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.boot-logo {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    animation: logoGlow 2s ease-in-out infinite alternate;
+    transform: scale(0);
+    animation: logoAppear 1s ease-out forwards;
+}
+
+@keyframes logoAppear {
+    from {
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes logoGlow {
+    from {
+        text-shadow: 0 0 20px rgba(88, 166, 255, 0.5);
+    }
+    to {
+        text-shadow: 0 0 30px rgba(88, 166, 255, 0.8), 0 0 40px rgba(88, 166, 255, 0.6);
+    }
+}
+
+.boot-title {
+    color: #58a6ff;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.boot-messages {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.boot-message {
+    color: #7d8590;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    white-space: nowrap;
+}
+
+.boot-message.success {
+    color: #238636;
+}
+
+.boot-message.warning {
+    color: #f85149;
+}
+
+.boot-message.info {
+    color: #58a6ff;
+}
+
+.boot-message.show {
+    animation: bootMessageSlide 0.6s ease-out forwards;
+}
+
+@keyframes bootMessageSlide {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.progress-container {
+    width: 300px;
+    height: 4px;
+    background: #21262d;
+    border-radius: 2px;
+    margin: 2rem 0;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out 2s forwards;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #58a6ff, #238636, #58a6ff);
+    background-size: 200% 100%;
+    width: 0%;
+    border-radius: 2px;
+    animation: progressFill 3s ease-out 2.5s forwards, progressShimmer 1.5s ease-in-out infinite 2.5s;
+}
+
+@keyframes progressFill {
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes progressShimmer {
+    0%, 100% {
+        background-position: 200% 0;
+    }
+    50% {
+        background-position: -200% 0;
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Terminal Window Styles */
+.terminal-window {
+    width: 100%;
+    max-width: 900px;
+    background: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+}
+
+.terminal-window.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.terminal-header {
+    background: #2a2a2a;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #333;
+}
+
+.window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.control-button.close { background: #ff5f56; }
+.control-button.minimize { background: #ffbd2e; }
+.control-button.maximize { background: #27ca3f; }
+
+.window-title {
+    flex: 1;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #888;
+    font-weight: 400;
+}
+
+.terminal-content {
+    padding: 30px;
+    background: #0d1117;
+    min-height: 600px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+}
+
+.app-title {
+    color: #58a6ff;
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.version-info {
+    color: #7d8590;
+    margin-left: auto;
+    font-size: 0.9rem;
+}
+
+/* Chat Area Styles */
+.chat-area {
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    background: #161b22;
+    min-height: 300px;
+    padding: 15px;
+    margin-bottom: 20px;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.chat-message {
+    margin-bottom: 15px;
+    animation: messageSlideIn 0.3s ease;
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.user-message {
+    color: #58a6ff;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.user-message::before {
+    content: '> student:';
+    color: #58a6ff;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.bot-message {
+    color: #f0f6fc;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-left: 15px;
+    padding: 8px 0;
+}
+
+.bot-message::before {
+    content: '🎓 EduBot:';
+    color: #238636;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* Input Section Styles */
+.input-section {
+    margin-top: 20px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.input-prompt {
+    color: #58a6ff;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.message-input {
+    background: transparent;
+    border: none;
+    color: #f0f6fc;
+    font-family: inherit;
+    font-size: 1rem;
+    flex: 1;
+    padding: 8px 0;
+    outline: none;
+    border-bottom: 1px solid #21262d;
+    transition: border-color 0.3s ease;
+}
+
+.message-input:focus {
+    border-bottom-color: #58a6ff;
+}
+
+.message-input::placeholder {
+    color: #484f58;
+}
+
+.command-hints {
+    font-size: 0.85rem;
+    color: #7d8590;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.command-hint {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.command-key {
+    background: #21262d;
+    border: 1px solid #30363d;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.command-key:hover {
+    border-color: #58a6ff;
+    color: #58a6ff;
+}
+
+/* Quick Commands Styles */
+.quick-commands {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.quick-btn {
+    background: transparent;
+    border: 1px solid #30363d;
+    color: #7d8590;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.quick-btn:hover {
+    border-color: #58a6ff;
+    color: #58a6ff;
+}
+
+.quick-btn.student-btn:hover {
+    border-color: #f85149;
+    color: #f85149;
+}
+
+.quick-btn.teacher-btn:hover {
+    border-color: #a5a5a5;
+    color: #a5a5a5;
+}
+
+/* Animation Styles */
+.cursor {
+    display: inline-block;
+    background: #58a6ff;
+    width: 2px;
+    height: 1.2em;
+    animation: cursorBlink 1s infinite;
+    margin-left: 5px;
+}
+
+@keyframes cursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.typing-indicator {
+    color: #7d8590;
+    font-style: italic;
+    animation: typingPulse 1.5s infinite;
+}
+
+@keyframes typingPulse {
+    0%, 50% { opacity: 0.5; }
+    25%, 75% { opacity: 1; }
+}
+
+.teacher-status {
+    color: #238636;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #238636;
+    border-radius: 50%;
+    animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+
+    .boot-logo {
+        font-size: 3rem;
+    }
+
+    .boot-title {
+        font-size: 1.4rem;
+    }
+
+    .progress-container {
+        width: 250px;
+    }
+    
+    .terminal-window {
+        max-width: 100%;
+        border-radius: 8px;
+    }
+    
+    .terminal-content {
+        padding: 15px;
+        min-height: calc(100vh - 120px);
+        max-height: calc(100vh - 120px);
+    }
+    
+    .app-title {
+        font-size: 1.1rem;
+    }
+    
+    .chat-area {
+        min-height: 250px;
+        max-height: calc(100vh - 350px);
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+    
+    .quick-commands {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+    
+    .quick-btn {
+        padding: 10px 8px;
+        font-size: 0.75rem;
+        text-align: center;
+        white-space: nowrap;
+    }
+    
+    .input-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .input-prompt {
+        font-size: 0.9rem;
+    }
+    
+    .message-input {
+        font-size: 0.9rem;
+        padding: 10px;
+        border: 1px solid #21262d;
+        border-radius: 4px;
+        background: #0d1117;
+    }
+
+    .message-input:focus {
+        border-color: #58a6ff;
+    }
+
+    .cursor {
+        display: none;
+    }
+
+    .command-hints {
+        flex-direction: column;
+        gap: 8px;
+        font-size: 0.75rem;
+    }
+    
+    .command-hint {
+        justify-content: center;
+    }
+
+    .app-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+    }
+
+    .version-info {
+        margin-left: 0;
+        align-self: flex-end;
+        margin-top: -25px;
+    }
+    
+    .bot-message, .user-message {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+    
+    .terminal-header {
+        padding: 10px 15px;
+    }
+    
+    .window-title {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .boot-logo {
+        font-size: 2.5rem;
+    }
+
+    .boot-title {
+        font-size: 1.2rem;
+    }
+
+    .progress-container {
+        width: 200px;
+    }
+
+    .quick-commands {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-btn {
+        padding: 12px;
+        font-size: 0.8rem;
+    }
+    
+    .app-title {
+        font-size: 1rem;
+    }
+    
+    .terminal-content {
+        padding: 12px;
+    }
+    
+    .chat-area {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+    
+    .message-input {
+        font-size: 16px;
+    }
+}
