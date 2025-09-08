@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduBot AI - Enhanced Teacher's Day Bot</title>
+    <title>EduBot - Teacher's Day Terminal</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Boot Screen -->
     <div class="boot-screen" id="bootScreen">
-        <div class="boot-logo">✨</div>
-        <div class="boot-title">EduBot Terminal v4.0</div>
+        <div class="boot-logo">🎓</div>
+        <div class="boot-title">EduBot Terminal v3.0</div>
         <div class="boot-messages" id="bootMessages">
             <!-- Boot messages will be added dynamically -->
         </div>
@@ -28,41 +28,21 @@
                 <div class="control-button minimize"></div>
                 <div class="control-button maximize"></div>
             </div>
-            <div class="window-title">ai-edubot-terminal.exe</div>
+            <div class="window-title">edubot-terminal.exe</div>
         </div>
         
         <div class="terminal-content">
             <div class="app-header">
                 <div class="app-title">
                     <span>></span>
-                    <span>AI TEACHER'S DAY CHATBOT</span>
-                    <div class="ai-indicator">AI POWERED</div>
+                    <span>TEACHER'S DAY CHATBOT</span>
                 </div>
-                <div class="version-info">v4.0</div>
-            </div>
-
-            <!-- API Configuration Panel -->
-            <div class="api-config" id="apiConfig">
-                <div class="config-title">🔧 AI Configuration</div>
-                <div class="warning-message">
-                    ⚠️ Note: External AI APIs require valid API keys and may have usage limits or costs. Use at your own discretion.
-                </div>
-                <select class="config-input" id="aiProvider">
-                    <option value="none">No AI (Built-in Responses)</option>
-                    <option value="openai">OpenAI GPT</option>
-                    <option value="gemini">Google Gemini</option>
-                    <option value="claude">Anthropic Claude</option>
-                    <option value="huggingface">HuggingFace</option>
-                    <option value="local">Local AI Server</option>
-                </select>
-                <input type="password" class="config-input" id="apiKey" placeholder="Enter API Key (if required)">
-                <input type="text" class="config-input" id="customEndpoint" placeholder="Custom API Endpoint (optional)">
-                <button class="config-btn" onclick="saveAIConfig()">Save Configuration</button>
+                <div class="version-info">v3.0</div>
             </div>
 
             <div class="chat-area" id="chatArea">
                 <div class="chat-message bot-message">
-                    <span>Hello! I'm AI-Enhanced EduBot. I can provide built-in responses about Teacher's Day and education. Configure an AI service for enhanced conversations!</span>
+                    <span>Hello! I'm EduBot, your Teacher's Day assistant. I'm here to help you celebrate the incredible educators who shape our world. How may I assist you in honoring teachers today?</span>
                 </div>
             </div>
 
@@ -79,13 +59,16 @@
                 <button class="quick-btn" onclick="sendQuickMessage('poetry about teachers')">poetry</button>
                 <button class="quick-btn" onclick="sendQuickMessage('worldwide celebrations')">global</button>
                 <button class="quick-btn" onclick="sendQuickMessage('classroom activities')">activities</button>
+                <button class="quick-btn" onclick="sendQuickMessage('teacher challenges')">challenges</button>
+                <button class="quick-btn" onclick="sendQuickMessage('education technology')">edtech</button>
+                <button class="quick-btn" onclick="sendQuickMessage('motivational messages')">motivation</button>
+                <button class="quick-btn" onclick="sendQuickMessage('parent appreciation')">parents</button>
             </div>
             
             <div class="input-section">
                 <div class="input-container">
                     <span class="input-prompt">> ask:</span>
-                    <input type="text" class="message-input" id="messageInput" placeholder="ask anything about teachers and education..." maxlength="200">
-                    <button class="ai-toggle" id="aiToggle" onclick="toggleAI()">AI OFF</button>
+                    <input type="text" class="message-input" id="messageInput" placeholder="ask about teachers..." maxlength="200">
                     <span class="cursor"></span>
                 </div>
                 <div class="command-hints">
@@ -98,17 +81,13 @@
                         <span>reset chat</span>
                     </div>
                     <div class="command-hint">
-                        <span class="command-key" onclick="toggleConfig()">config</span>
-                        <span>AI settings</span>
-                    </div>
-                    <div class="command-hint">
                         <span class="command-key" onclick="sendQuickMessage('help')">help</span>
                         <span>show commands</span>
                     </div>
                     <div class="command-hint">
                         <div class="teacher-status">
                             <div class="status-dot"></div>
-                            <span id="aiStatus">Built-in responses active</span>
+                            <span>teacher appreciation active</span>
                         </div>
                     </div>
                 </div>
@@ -118,4 +97,4 @@
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
